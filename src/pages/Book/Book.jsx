@@ -3,7 +3,7 @@ import { FaStarHalfAlt } from "react-icons/fa";
 import { Link } from "react-router";
 
 const Book = ({ singleBook }) => {
-  console.log(singleBook);
+  // console.log(singleBook);
   const {
     image,
     // author,
@@ -26,7 +26,7 @@ const Book = ({ singleBook }) => {
         <div className="card-body">
           <div className="flex justify-between gap-10">
             {tags.map((tag) => (
-              <button>{tag}</button>
+              <button key={tag.bookId}>{tag}</button>
             ))}
           </div>
           <h2 className="card-title">
