@@ -1,5 +1,6 @@
 import React from "react";
-import { useLoaderData, useParams } from "react-router";
+import { Link, useLoaderData, useParams } from "react-router";
+import { addToStoreDB } from "../../Utility/addToDB";
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -13,12 +14,16 @@ const BookDetails = () => {
     author,
     category,
     review,
-    // rating,
-    // publisher,
-    // totalPages,
-    // yearOfPublishing,
+    rating,
+    publisher,
+    totalPages,
+    yearOfPublishing,
     tags,
   } = singleBook;
+
+  const handleMarkAsRead = (id) => {
+    addToStoreDB(id);
+  };
 
   return (
     <div className="flex  items-center my-10">
@@ -42,8 +47,20 @@ const BookDetails = () => {
             <p className="text-green-500">{tag}</p>
           ))}
         </div>
-        <button className="btn btn-accent m-2">Read</button>
-        <button className="btn btn-info m-2">wishList</button>
+        <p>Number of Pages:{totalPages} </p>
+        <p>Publisher: {publisher}</p>
+        <p>Year of Publishing: {yearOfPublishing}</p>
+        <p>Rating: {rating}</p>
+
+        <Link to="/readList">
+          <button
+            onClick={() => handleMarkAsRead(id)}
+            className="btn btn-accent m-2"
+          >
+            Mark as Read
+          </button>
+        </Link>
+        <button className="btn btn-info m-2">Add To wishList</button>
       </div>
     </div>
   );
